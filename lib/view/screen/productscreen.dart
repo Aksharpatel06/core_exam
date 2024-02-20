@@ -25,18 +25,6 @@ class _productState extends State<product> {
                 size: 25,
               ),
             ),
-            actions: [
-              InkWell(
-                overlayColor: MaterialStateProperty.all(Colors.transparent),
-                onTap: () {
-                  Navigator.of(context).pushNamed('/card');
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 15.0),
-                  child: Icon(Icons.shopping_bag_outlined,size: 35,),
-                ),
-              ),
-            ],
             backgroundColor: Colors.grey.shade200,
           ),
           body: Center(
@@ -51,37 +39,6 @@ class _productState extends State<product> {
                 ),
                 SizedBox(
                   height: 5,
-                ),
-                Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 170),
-                      height: 8,
-                      width: 22,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Container(
-                      height: 8,
-                      width: 8,
-                      decoration: BoxDecoration(
-                        color: Colors.black26,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Container(
-                      height: 8,
-                      width: 8,
-                      decoration: BoxDecoration(
-                        color: Colors.black26,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ],
                 ),
                 SizedBox(
                   height: 16.8,
@@ -177,7 +134,7 @@ class _productState extends State<product> {
                       Padding(
                         padding: const EdgeInsets.only(left: 25.0),
                         child: SizedBox(height: 50,
-                          width: 350,
+                          width: 300,
                           child: ElevatedButton(
                             onPressed: () {
                               cardlist.add(list);
@@ -217,8 +174,6 @@ Widget size({int? size, Color? color}) {
       width: 35,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black26),
-        color: color,
-        shape: BoxShape.circle,
       ),
       child: Center(child: Text('$size', style: TextStyle(fontSize: 11))),
     ),

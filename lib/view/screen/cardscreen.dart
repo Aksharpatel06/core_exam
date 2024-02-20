@@ -14,10 +14,15 @@ class _cardscreenState extends State<cardscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: InkWell(onTap: () {
-          Navigator.pushNamed(context, '/');
-        },child: Icon(Icons.arrow_back_sharp)),
-        title: Text('My card',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+        leading: InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, '/');
+            },
+            child: Icon(Icons.arrow_back_sharp)),
+        title: Text(
+          'My card',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
       ),
       body: Column(
         children: [
@@ -26,10 +31,10 @@ class _cardscreenState extends State<cardscreen> {
               child: Column(
                   children: List.generate(
                       cardlist.length,
-                          (index) => cart(
+                      (index) => cart(
                           name: cardlist[index]['name'],
-                          prize: cardlist[index]['prize'],
-                          img: cardlist[index]['Image'],
+                          prize: cardlist[index]['price'],
+                          img: cardlist[index]['img'],
                           index: index))),
             ),
           ),
@@ -119,9 +124,8 @@ class _cardscreenState extends State<cardscreen> {
                               wordSpacing: 2),
                         ),
                       ),
-
-                       Text(
-                        '\$ 0.0',
+                      Text(
+                        '\$ $count',
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -129,7 +133,6 @@ class _cardscreenState extends State<cardscreen> {
                             letterSpacing: 1.5,
                             wordSpacing: 2),
                       ),
-                      // Text('\$ ${count+discount}',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black,letterSpacing: 1.5,wordSpacing: 2),),
                     ],
                   ),
                   SizedBox(
@@ -140,19 +143,16 @@ class _cardscreenState extends State<cardscreen> {
                     width: 350,
                     decoration: BoxDecoration(
                       color: Colors.grey.shade700,
-                      borderRadius:
-                      const BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                       border: Border.all(color: Colors.grey, width: 0.5),
                     ),
                     child: Center(
-                      child:
-                          Text('checkout',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                          ))
-                    ),
+                        child: Text('checkout',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ))),
                   )
                 ],
               ),
@@ -161,8 +161,8 @@ class _cardscreenState extends State<cardscreen> {
         ],
       ),
     );
-
   }
+
   Widget cart({String? img, String? name, double? prize, int? index}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -189,19 +189,40 @@ class _cardscreenState extends State<cardscreen> {
             ),
             Column(
               children: [
-                Container(
-                  width: 220,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 18.0),
-                    child: Text(
-                      name!,
-                      overflow: TextOverflow.clip,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                Row(
+                  children: [
+                    Container(
+                      width: 220,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0, top: 18.0),
+                        child: Text(
+                          name!,
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 150.0),
+                        child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                cardlist.removeAt(index!);
+                                count = 0;
+                                for (int i = 0; i < cardlist.length; i++) {
+                                  count += (cardlist[i]['price'] *
+                                      cardlist[i]['qty']);
+                                }
+                              });
+                            },
+                            icon: Icon(Icons.delete_outline)),
+                      ),
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 145.0),
@@ -214,23 +235,6 @@ class _cardscreenState extends State<cardscreen> {
                 ),
                 Stack(
                   children: [
-                    Container(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 150.0),
-                        child: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                cardlist.removeAt(index!);
-                                count = 0;
-                                for (int i = 0; i < cardlist.length; i++) {
-                                  count += (cardlist[i]['prize'] *
-                                      cardlist[i]['qty']);
-                                }
-                              });
-                            },
-                            icon: Icon(Icons.delete_outline)),
-                      ),
-                    ),
                     Padding(
                       padding: const EdgeInsets.only(right: 110.0, top: 14.0),
                       child: Row(
@@ -243,7 +247,7 @@ class _cardscreenState extends State<cardscreen> {
                               shape: BoxShape.circle,
                               color: Colors.grey.shade200,
                               border:
-                              Border.all(color: Colors.grey, width: 0.5),
+                                  Border.all(color: Colors.grey, width: 0.5),
                             ),
                             child: IconButton(
                                 onPressed: () {
@@ -277,7 +281,7 @@ class _cardscreenState extends State<cardscreen> {
                               shape: BoxShape.circle,
                               color: Colors.grey.shade200,
                               border:
-                              Border.all(color: Colors.grey, width: 0.5),
+                                  Border.all(color: Colors.grey, width: 0.5),
                             ),
                             child: IconButton(
                                 onPressed: () {
@@ -308,4 +312,5 @@ class _cardscreenState extends State<cardscreen> {
     );
   }
 }
-double count =0;
+
+double count = 0;

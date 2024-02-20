@@ -111,9 +111,7 @@ class _homescreenState extends State<homescreen> {
   {
     return InkWell(
       onTap: () {
-        setState(){
-          Navigator.pushNamed(context, '/product',arguments: product12[index]);
-        }
+        Navigator.of(context).pushNamed('/product',arguments: product12[index]);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,9 +150,7 @@ class _homescreenState extends State<homescreen> {
   {
     return InkWell(
       onTap: () {
-        setState(){
-          Navigator.pushNamed(context, '/product',arguments: product122[index]);
-        }
+          Navigator.of(context).pushNamed('/product',arguments: product122[index]);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
