@@ -25,13 +25,20 @@ class _homescreenState extends State<homescreen> {
                 ),
                 child: Icon(Icons.notifications)),
             SizedBox(width: 8,),
-            Container(height: 40,
-                width: 40,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    border: Border.all(color: Colors.grey,width: 0.5)
-                ),
-                child: Icon(Icons.shopping_cart)),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  Navigator.pushNamed(context, '/card');
+                });
+              },
+              child: Container(height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      border: Border.all(color: Colors.grey,width: 0.5)
+                  ),
+                  child: Icon(Icons.shopping_cart)),
+            ),
             SizedBox(width: 8,),
           ],
         ),

@@ -29,11 +29,6 @@ class _productState extends State<product> {
               InkWell(
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
                 onTap: () {
-                  // count = 0;
-                  // for (int i = 0; i < cardlist.length; i++) {
-                  //   count += (cardlist[i]['prize'] *
-                  //       cardlist[i]['qty']);
-                  // }
                   Navigator.of(context).pushNamed('/card');
                 },
                 child: Padding(
@@ -186,7 +181,6 @@ class _productState extends State<product> {
                           child: ElevatedButton(
                             onPressed: () {
                               cardlist.add(list);
-                              // num=1;
                             },
                             child: Center(child: Text('Add to cart',style: TextStyle(
                               fontSize: 16,
