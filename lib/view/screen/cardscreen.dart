@@ -163,7 +163,7 @@ class _cardscreenState extends State<cardscreen> {
     );
   }
 
-  Widget cart({String? img, String? name, double? prize, int? index}) {
+  Widget cart({String? img, String? name, int? prize, int? index}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -205,23 +205,6 @@ class _cardscreenState extends State<cardscreen> {
                         ),
                       ),
                     ),
-                    Container(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 150.0),
-                        child: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                cardlist.removeAt(index!);
-                                count = 0;
-                                for (int i = 0; i < cardlist.length; i++) {
-                                  count += (cardlist[i]['price'] *
-                                      cardlist[i]['qty']);
-                                }
-                              });
-                            },
-                            icon: Icon(Icons.delete_outline)),
-                      ),
-                    ),
                   ],
                 ),
                 Padding(
@@ -233,10 +216,24 @@ class _cardscreenState extends State<cardscreen> {
                     ),
                   ),
                 ),
+                Container(
+                  child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          cardlist.removeAt(index!);
+                          count = 0;
+                          for (int i = 0; i < cardlist.length; i++) {
+                            count += (cardlist[i]['price'] *
+                                cardlist[i]['quantity']);
+                          }
+                        });
+                      },
+                      icon: Icon(Icons.delete_outline)),
+                ),
                 Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 110.0, top: 14.0),
+                      padding: const EdgeInsets.only(right: 110.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -254,11 +251,11 @@ class _cardscreenState extends State<cardscreen> {
                                   setState(() {
                                     count = 0;
                                     for (int i = 0; i < cardlist.length; i++) {
-                                      count += (cardlist[i]['prize'] *
-                                          cardlist[i]['qty']);
-                                    }
-                                    if (cardlist[index!]['qty'] > 0) {
-                                      cardlist[index!]['qty']--;
+                                      if(cardlist[i]['quantity']>0)
+                                      {
+                                        count += (cardlist[i]['price'] *
+                                            cardlist[i]['quantity']);
+                                      }
                                     }
                                   });
                                 },
@@ -270,7 +267,7 @@ class _cardscreenState extends State<cardscreen> {
                           SizedBox(
                             width: 10,
                           ),
-                          Text('${cardlist[index!]['qty']}'),
+                          Text('${cardlist[index!]['quantity']}'),
                           SizedBox(
                             width: 10,
                           ),
@@ -288,10 +285,10 @@ class _cardscreenState extends State<cardscreen> {
                                   setState(() {
                                     count = 0;
                                     for (int i = 0; i < cardlist.length; i++) {
-                                      count += (cardlist[i]['prize'] *
-                                          cardlist[i]['qty']);
+                                      count += (cardlist[i]['price'] *
+                                          cardlist[i]['quantity']);
                                     }
-                                    cardlist[index!]['qty']++;
+                                    cardlist[index]['quantity']++;
                                   });
                                 },
                                 icon: Icon(
